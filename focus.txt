@@ -1,0 +1,4 @@
+# Anything you write below (on lines without a #) gets worked into the next morning's texts.
+# Examples: Contest ends Friday.  /  Push final expense this week.  /  Team wrote 14 policies yesterday.
+# Leave it empty when there's nothing special going on.
+# This repo is public: anyone can read this file, so no names or private numbers.

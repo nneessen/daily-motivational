@@ -1,0 +1,49 @@
+name: Morning texts
+
+on:
+  schedule:
+    # GitHub cron runs in UTC. Both lines are 5:17 AM in Denver, Monday to Friday:
+    # the first while Denver is on daylight time (MDT), the second on standard time (MST).
+    - cron: "17 11 * * 1-5"
+    - cron: "17 12 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Goes by which cron fired, not the clock, so a late start can't cause a skip or a double send.
+      - name: Skip the cron that doesn't match Denver's clock today
+        id: gate
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          zone=$(TZ=America/Denver date +%Z)
+          run=true
+          if [ "$EVENT" = "schedule" ]; then
+            case "$SCHEDULE" in
+              "17 11 * * 1-5") [ "$zone" = "MDT" ] || run=false ;;
+              "17 12 * * 1-5") [ "$zone" = "MST" ] || run=false ;;
+            esac
+          fi
+          echo "Denver is on $zone, run=$run"
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        if: steps.gate.outputs.run == 'true'
+
+      - uses: actions/setup-go@v7
+        if: steps.gate.outputs.run == 'true'
+        with:
+          go-version-file: go.mod
+
+      - name: Write and email this morning's texts
+        if: steps.gate.outputs.run == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
+          TO_ADDRESS: ${{ secrets.TO_ADDRESS }}
+        run: go run .
