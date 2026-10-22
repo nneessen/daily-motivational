@@ -6,6 +6,8 @@ on:
     # the first while Denver is on daylight time (MDT), the second on standard time (MST).
     - cron: "17 11 * * 1-5"
     - cron: "17 12 * * 1-5"
+    # TEMPORARY probe: proves GitHub fires this repo's schedule at all. The gate skips it. Remove once it has run.
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -26,6 +28,8 @@ jobs:
             case "$SCHEDULE" in
               "17 11 * * 1-5") [ "$zone" = "MDT" ] || run=false ;;
               "17 12 * * 1-5") [ "$zone" = "MST" ] || run=false ;;
+              # Any other cron never sends.
+              *) run=false ;;
             esac
           fi
           echo "Denver is on $zone, run=$run"
