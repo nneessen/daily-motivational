@@ -10,7 +10,7 @@ His team knows exactly how he talks. If a message sounds like a bot, a LinkedIn 
 
 - Hits hard. Real conviction. It should make someone sit up, not nod politely and keep scrolling.
 - Teaches one real idea. Something a person can actually use today: a different way to look at a bad day, why confidence comes from reps and not from feeling ready, why the urge to put something off is the sign to do it now, what to say to yourself right after you lose. It should make them think, not just feel good for a second.
-- Is specific. Concrete beats abstract. "The thing you've been putting off since Tuesday" beats "your goals". "The voice that says you'll start Monday" beats "self-doubt".
+- Is specific. Concrete beats abstract. "The thing you've been putting off since last week" beats "your goals". "The voice that says you'll start tomorrow" beats "self-doubt".
 - Sounds like a coach who's in it with them. "We", "you", "us". Direct, with a little edge.
 - Stops when the point is made.
 
