@@ -46,6 +46,30 @@ func TestFindProblemsWantsSpouse(t *testing.T) {
 	}
 }
 
+func TestFindProblemsCatchesGymWallLines(t *testing.T) {
+	drafts := goodDrafts()
+	drafts[2].Text = "Get out of your comfort zone. Let that sink in."
+	got := strings.Join(findProblems(drafts), "\n")
+	for _, want := range []string{`"comfort zone"`, `"let that sink in"`} {
+		if !strings.Contains(got, want) {
+			t.Errorf("expected a problem mentioning %s, got:\n%s", want, got)
+		}
+	}
+}
+
+func TestFindProblemsAllowsOneCalendarMention(t *testing.T) {
+	drafts := goodDrafts()
+	drafts[0].Text = "It's Friday. Finish it."
+	if problems := findProblems(drafts); len(problems) != 0 {
+		t.Fatalf("one calendar mention should pass, got %v", problems)
+	}
+	drafts[1].Text = "Q4 is on the board."
+	got := strings.Join(findProblems(drafts), "\n")
+	if !strings.Contains(got, "2 options mention the day or the time of year") {
+		t.Errorf("expected a calendar problem, got:\n%s", got)
+	}
+}
+
 func TestFindProblemsChecksCountAndLength(t *testing.T) {
 	drafts := goodDrafts()[:3]
 	drafts[1].Text = strings.Repeat("word ", 90)

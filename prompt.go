@@ -15,22 +15,36 @@ import (
 var voiceGuide string
 
 // angles are the ideas a message can be built around. A different four are picked
-// each morning so the options don't all say the same thing.
+// each morning so the options don't all say the same thing. Most are about mindset,
+// not the job; the last few tie back to the work.
 var angles = []string{
-	"take every call, no cherry-picking: the billing and 'quick question' calls count",
-	"listen more than you talk and let the caller tell you what they need",
-	"ask one more question than feels natural",
-	"the whole household: spouse, grown kids starting families, parents who never got set up",
-	"bouncing back after a rough call or a slow day",
-	"consistency over hype: same effort on the last call as the first",
-	"the mission: every policy written is a family protected",
-	"trust the system, it works when you work it",
-	"the first call of the day sets the tone",
-	"finish the day strong, the last hour counts the same",
-	"make an attempt on every call, even when it feels like a long shot",
-	"stay present: callers can hear when you're distracted",
-	"get curious about the caller's situation",
-	"no two calls are the same, so reset after each one",
+	"whatever it takes: once you're really committed, you stop asking if and start asking how",
+	"discipline beats mood: you don't wait to feel like it, you start and the feeling catches up",
+	"confidence is built from evidence: reps and proof, not hyping yourself up or waiting to feel ready",
+	"identity first: decide who you are, and the actions follow before the results show up",
+	"a no is information, not a verdict on you",
+	"what you say to yourself right after a loss decides the next hour",
+	"control what you control: your effort, your attitude, your activity, and let the rest go",
+	"nerves and excitement feel the same in your body, so call it excitement and use it",
+	"the thing you keep putting off is usually the thing that moves you forward, so do it first",
+	"skill gets built in boring reps nobody sees, and it stacks up faster than people expect",
+	"ownership: the second you blame the leads, the market or the day, you hand your power away",
+	"your real standard is what you do on your worst day, not your best",
+	"stay hungry after a win: a good week is exactly when most people ease off",
+	"the people you spend time with and what you put in your head set your ceiling",
+	"a specific number you look at every day beats a vague wish",
+	"the work you put in now pays you months from now, so keep stacking even when you can't see it yet",
+	"the fear of looking dumb holds people back more than any lack of talent",
+	"be coachable: the people who grow fastest take feedback without getting defensive",
+	"your energy is a decision you make before the day starts, and the room feels it",
+	"keep the promises you make to yourself: each one builds trust in yourself, each broken one chips it away",
+	"decide ahead of time what you'll do when the hard moment shows up, so you don't negotiate with yourself in it",
+	"repetition and boredom are where most people quit, and that's where the separation happens",
+	"playing it safe feels free, but it costs you slowly in everything you didn't go after",
+	"who's counting on you at home is the reason to push when it gets heavy",
+	"every person who calls already reached out, and one more question might protect their whole family",
+	"one conversation can cover a whole household: a spouse, grown kids, parents who never got set up",
+	"income is a scoreboard for how many families you've protected, so chase the families",
 }
 
 func pickAngles(n int) []string {
@@ -92,6 +106,7 @@ func calendarNotes(t time.Time) []string {
 
 func buildPrompt(today time.Time, picked []string, focus string) string {
 	var b strings.Builder
+	b.WriteString("Background only. Don't build the messages around the day or the time of year. At most one option may mention either.\n")
 	fmt.Fprintf(&b, "Today is %s. %s\n", today.Format("Monday, January 2, 2006"), weekdayNote(today.Weekday()))
 	for _, note := range calendarNotes(today) {
 		b.WriteString(note + "\n")

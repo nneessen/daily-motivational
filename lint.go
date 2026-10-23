@@ -22,8 +22,16 @@ const (
 var bannedPhrases = []string{
 	"game-changer", "game changer", "unlock", "elevate", "journey", "crush it",
 	"embrace", "harness", "level up", "synergy", "rockstar", "superstar",
-	"ignite", "unleash", "dive in", "here's the thing", "in today's", "rise and shine",
+	"ignite", "unleash", "dive in", "let that sink in", "read that again", "you got this",
+	"you've got this", "at the end of the day", "here's the thing", "in today's",
+	"good morning team", "rise and shine", "let's talk about", "i get it", "we've all been there",
+	// gym-wall lines
+	"comfort zone", "1% better", "rent is due", "the grind", "hard work beats talent",
+	"not a sprint", "no pain no gain", "hardest worker in the room", "only competition is yourself",
 }
+
+// calendarTalk spots a message built around the day or the time of year.
+var calendarTalk = regexp.MustCompile(`(?i)\b(monday|tuesday|wednesday|thursday|friday|weekend|q4|quarter|final stretch|end of the year)\b`)
 
 // wifeOrHusband guesses who's calling. Nick says "spouse".
 var wifeOrHusband = regexp.MustCompile(`(?i)\b(wife|wives|husbands?)\b`)
@@ -39,6 +47,15 @@ func findProblems(drafts []Draft) []string {
 	var problems []string
 	if len(drafts) != draftCount {
 		problems = append(problems, fmt.Sprintf("there were %d options instead of %d", len(drafts), draftCount))
+	}
+	calendarCount := 0
+	for _, d := range drafts {
+		if calendarTalk.MatchString(d.Text) {
+			calendarCount++
+		}
+	}
+	if calendarCount > 1 {
+		problems = append(problems, fmt.Sprintf("%d options mention the day or the time of year, only one may", calendarCount))
 	}
 	for i, d := range drafts {
 		n := i + 1
