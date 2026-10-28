@@ -1,6 +1,7 @@
 package main
 
 import (
+	"slices"
 	"strings"
 	"testing"
 	"time"
@@ -38,11 +39,11 @@ func TestParseQuotesRejectsBadLines(t *testing.T) {
 
 func TestWeekdayNumber(t *testing.T) {
 	tests := map[string]int{
-		"2026-01-05": 0, // Monday
-		"2026-01-09": 4, // Friday
-		"2026-01-10": 5, // Saturday shares the next Monday's number
-		"2026-01-12": 5, // Monday
-		"2026-10-28": 212,
+		"2026-10-26": 0, // Monday
+		"2026-10-30": 4, // Friday
+		"2026-10-31": 5, // Saturday shares the next Monday's number
+		"2026-11-02": 5, // Monday
+		"2026-12-25": 44,
 	}
 	for date, want := range tests {
 		day, _ := time.Parse("2006-01-02", date)
@@ -80,5 +81,40 @@ func TestQuotesForIsSteadyWithinADay(t *testing.T) {
 		if a[i] != b[i] {
 			t.Fatalf("a rerun the same day picked different quotes: %v vs %v", a, b)
 		}
+	}
+}
+
+// weekdaysFrom lists count weekdays starting at day.
+func weekdaysFrom(day time.Time, count int) []time.Time {
+	var days []time.Time
+	for ; len(days) < count; day = day.AddDate(0, 0, 1) {
+		if day.Weekday() != time.Saturday && day.Weekday() != time.Sunday {
+			days = append(days, day)
+		}
+	}
+	return days
+}
+
+func TestAddingAQuoteBarelyChangesTheRotation(t *testing.T) {
+	bank, _ := parseQuotes(quotesFile)
+	days := weekdaysFrom(time.Date(2026, 10, 28, 5, 17, 0, 0, time.UTC), 30)
+	sent := map[Quote]bool{}
+	for _, day := range days[:10] {
+		for _, q := range quotesFor(day, bank, draftCount) {
+			sent[q] = true
+		}
+	}
+	// Nick adds a quote on github.com, then the next 20 mornings run.
+	edited := append(slices.Clone(bank), Quote{Text: "A brand new quote nobody has seen.", Author: "Someone"})
+	repeats := 0
+	for _, day := range days[10:] {
+		for _, q := range quotesFor(day, edited, draftCount) {
+			if sent[q] {
+				repeats++
+			}
+		}
+	}
+	if repeats > 1 {
+		t.Errorf("adding one quote brought back %d quotes from the last 10 mornings, want at most 1", repeats)
 	}
 }

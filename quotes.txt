@@ -9,6 +9,7 @@
 # The program prints each quote exactly as written here. Claude only writes the line under it.
 # Use plain " and ' quote marks and a plain hyphen, no curly quotes or long dashes.
 # Each weekday takes the next four, so a quote doesn't come back until the whole list has been used.
+# Adding or removing a quote is fine: at most a quote or two from recent mornings comes back early.
 
 # Starting and acting
 The most difficult thing is the decision to act, the rest is merely tenacity. | Amelia Earhart
@@ -17,13 +18,12 @@ Well done is better than well said. | Benjamin Franklin
 A good plan violently executed right now is far better than a perfect plan executed next week. | George S. Patton
 I will act now. | Og Mandino
 Don't look back. Something might be gaining on you. | Satchel Paige
-Either you run the day or the day runs you. | Jim Rohn
 The best way out is always through. | Robert Frost
 While we are postponing, life speeds by. | Seneca
 Begin at once to live, and count each separate day as a separate life. | Seneca
 Make each day your masterpiece. | John Wooden
 I believe that it's in your moments of decision that your destiny is shaped. | Tony Robbins
-Do. Or do not. There is no try. | Yoda
+Do... or do not. There is no try. | Yoda
 It always comes down to just two choices. Get busy living or get busy dying. | Stephen King
 
 Do not wait; the time will never be 'just right.' Start where you stand, and work with whatever tools you may have at your command, and better tools will be found as you go along. | Napoleon Hill
@@ -52,6 +52,9 @@ Discipline is the bridge between goals and accomplishment. | Jim Rohn
 Success is nothing more than a few simple disciplines, practiced every day. | Jim Rohn
 Without commitment, you'll never start. But more importantly, without consistency, you'll never finish. | Denzel Washington
 Spend each day trying to be a little wiser than you were when you woke up. | Charlie Munger
+Success isn't always about greatness. It's about consistency. Consistent hard work gains success. Greatness will come. | Dwayne Johnson
+Be quick, but don't hurry. | John Wooden
+It's the little details that are vital. Little things make big things happen. | John Wooden
 
 # Work and effort
 Far and away the best prize that life offers is the chance to work hard at work worth doing. | Theodore Roosevelt
@@ -79,6 +82,7 @@ Talent is cheaper than table salt. What separates the talented individual from t
 When you want to succeed as bad as you want to breathe, then you'll be successful. | Eric Thomas
 Success is not to be pursued; it is to be attracted by the person you become. | Jim Rohn
 The score takes care of itself. | Bill Walsh
+I've never really viewed myself as particularly talented... Where I excel is ridiculous, sickening work ethic. | Will Smith
 
 # Losing, getting back up, keeping on
 I've missed over 9,000 shots in my career. I've lost almost 300 games. 26 times I've been trusted to take the game-winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed. | Michael Jordan
@@ -133,6 +137,7 @@ Limits, like fears, are often just an illusion. | Michael Jordan
 No human is limited. | Eliud Kipchoge
 Pressure is a privilege. | Billie Jean King
 Champions adjust. | Billie Jean King
+Do not let what you cannot do interfere with what you can do. | John Wooden
 Always bear in mind that your own resolution to succeed is more important than any other one thing. | Abraham Lincoln
 He who has a why to live for can bear almost any how. | Friedrich Nietzsche
 Your time is limited, so don't waste it living someone else's life. | Steve Jobs

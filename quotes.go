@@ -1,9 +1,11 @@
 package main
 
 import (
+	"cmp"
 	_ "embed"
 	"fmt"
-	"math/rand/v2"
+	"hash/fnv"
+	"slices"
 	"strings"
 	"time"
 )
@@ -39,7 +41,7 @@ func parseQuotes(raw string) (quotes []Quote, bad []string) {
 }
 
 // rotationStart is a Monday. Weekdays are counted from here to pick each day's quotes.
-var rotationStart = time.Date(2026, time.January, 5, 0, 0, 0, 0, time.UTC)
+var rotationStart = time.Date(2026, time.October, 26, 0, 0, 0, 0, time.UTC)
 
 // weekdayNumber counts the weekdays from rotationStart to day. A Saturday or Sunday
 // shares the next Monday's number.
@@ -49,16 +51,25 @@ func weekdayNumber(day time.Time) int {
 	return days/7*5 + min(days%7, 5)
 }
 
-// quotesFor picks the day's quotes. The bank is shuffled once in a fixed order and each
-// weekday takes the next n, so no quote comes back until the whole bank has been used.
-// Rerunning on the same day gives the same quotes.
+// quotesFor picks the day's quotes. The bank is put in a fixed order by a hash of each
+// quote and each weekday takes the next n, so no quote comes back until the whole bank
+// has been used. Because the order comes from the quotes themselves, adding or removing
+// one only moves that one, and at most a quote or two from recent mornings comes back
+// early. Rerunning on the same day gives the same quotes.
 func quotesFor(day time.Time, bank []Quote, n int) []Quote {
-	order := rand.New(rand.NewPCG(20261028, 1)).Perm(len(bank))
+	order := slices.Clone(bank)
+	slices.SortFunc(order, func(a, b Quote) int { return cmp.Compare(rotationKey(a), rotationKey(b)) })
 	start := weekdayNumber(day) * n
 	picked := make([]Quote, n)
 	for i := range picked {
-		pos := ((start+i)%len(bank) + len(bank)) % len(bank)
-		picked[i] = bank[order[pos]]
+		picked[i] = order[((start+i)%len(order)+len(order))%len(order)]
 	}
 	return picked
+}
+
+// rotationKey is where a quote sits in the rotation.
+func rotationKey(q Quote) uint64 {
+	h := fnv.New64a()
+	h.Write([]byte(q.Text))
+	return h.Sum64()
 }

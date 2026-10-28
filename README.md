@@ -2,7 +2,7 @@
 
 Every weekday at 5:17 AM Denver time, a cron-job.org timer tells GitHub to run this program. It emails you (the `TO_ADDRESS` secret) 4 options for the morning text to the team. Each one is a real quote from a real person with one short line from you under it. Pick one, tweak it, send it.
 
-The quotes come from `quotes.txt` and are printed exactly as written there. Claude only writes the short line under each one, so it can't misquote anybody or make a quote up. Each weekday takes the next 4 quotes, so none comes back until the whole list has been used.
+The quotes come from `quotes.txt` and are printed exactly as written there. Claude only writes the short line under each one, so it can't misquote anybody or make a quote up. Each weekday takes the next 4 quotes, so none comes back until the whole list has been used. Adding or removing a quote is fine: at most a quote or two from recent mornings comes back early.
 
 ## Change what it writes
 - **Quotes:** edit `quotes.txt`, one per line: `the quote | who said it`. Check who really said it at quoteinvestigator.com or en.wikiquote.org before adding one. A lot of famous quotes are pinned on the wrong person.
