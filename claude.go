@@ -5,39 +5,43 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/anthropics/anthropic-sdk-go"
 )
 
-// Draft is one text option for the team.
+// Draft is one text option: a quote from the bank and the line Nick adds under it.
 type Draft struct {
-	Label string `json:"label"`
-	Text  string `json:"text"`
+	Quote Quote
+	Line  string
 }
 
-// draftSchema is the JSON shape Claude has to answer in, so there's never a
+// Text is the message as Nick would send it. The quote comes straight from the bank,
+// so Claude can never misquote anyone.
+func (d Draft) Text() string {
+	text := fmt.Sprintf("\"%s\"\n- %s", d.Quote.Text, d.Quote.Author)
+	if line := strings.TrimSpace(d.Line); line != "" {
+		text += "\n\n" + line
+	}
+	return text
+}
+
+// linesSchema is the JSON shape Claude has to answer in, so there's never a
 // "Here are your messages!" preamble to strip off.
-var draftSchema = map[string]any{
+var linesSchema = map[string]any{
 	"type": "object",
 	"properties": map[string]any{
-		"messages": map[string]any{
-			"type": "array",
-			"items": map[string]any{
-				"type": "object",
-				"properties": map[string]any{
-					"label": map[string]any{"type": "string"},
-					"text":  map[string]any{"type": "string"},
-				},
-				"required":             []string{"label", "text"},
-				"additionalProperties": false,
-			},
+		"lines": map[string]any{
+			"type":  "array",
+			"items": map[string]any{"type": "string"},
 		},
 	},
-	"required":             []string{"messages"},
+	"required":             []string{"lines"},
 	"additionalProperties": false,
 }
 
-func generate(ctx context.Context, client *anthropic.Client, prompt string) ([]Draft, error) {
+// generate asks Claude for the line under each quote, one per quote, in order.
+func generate(ctx context.Context, client *anthropic.Client, prompt string) ([]string, error) {
 	resp, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
 		Model:     "claude-opus-5-5",
 		MaxTokens: 16000,
@@ -47,7 +51,7 @@ func generate(ctx context.Context, client *anthropic.Client, prompt string) ([]D
 		},
 		OutputConfig: anthropic.BetaOutputConfigParam{
 			Effort: anthropic.BetaOutputConfigEffortHigh,
-			Format: anthropic.BetaJSONOutputFormatParam{Schema: draftSchema},
+			Format: anthropic.BetaJSONOutputFormatParam{Schema: linesSchema},
 		},
 		// If a safety check ever declines the request, the API reruns it on a backup model.
 		Fallbacks: anthropic.BetaFallbacksParamOfDefault(),
@@ -67,12 +71,12 @@ func generate(ctx context.Context, client *anthropic.Client, prompt string) ([]D
 	for _, block := range resp.Content {
 		if text, ok := block.AsAny().(anthropic.BetaTextBlock); ok {
 			var out struct {
-				Messages []Draft `json:"messages"`
+				Lines []string `json:"lines"`
 			}
 			if err := json.Unmarshal([]byte(text.Text), &out); err != nil {
 				return nil, fmt.Errorf("parse claude output: %w", err)
 			}
-			return out.Messages, nil
+			return out.Lines, nil
 		}
 	}
 	return nil, errors.New("claude response had no text block")

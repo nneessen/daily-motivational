@@ -1,11 +1,13 @@
 # Morning texts
 
-Every weekday at 5:17 AM Denver time, a cron-job.org timer tells GitHub to run this program. It asks Claude for 4 options for the morning text to the team (3 short, 1 longer) and emails them to you (the `TO_ADDRESS` secret). Pick one, tweak it, send it.
+Every weekday at 5:17 AM Denver time, a cron-job.org timer tells GitHub to run this program. It emails you (the `TO_ADDRESS` secret) 4 options for the morning text to the team. Each one is a real quote from a real person with one short line from you under it. Pick one, tweak it, send it.
+
+The quotes come from `quotes.txt` and are printed exactly as written there. Claude only writes the short line under each one, so it can't misquote anybody or make a quote up. Each weekday takes the next 4 quotes, so none comes back until the whole list has been used.
 
 ## Change what it writes
-- **Tone and rules:** edit `voice.md`. It's the whole prompt, with your real example message in it.
-- **This week's news:** write a line or two in `focus.txt` (like "Contest ends Friday."). It gets worked into the next texts. Clear it out when it's old. The repo is public, so only write what you'd be fine with anyone reading.
-- **Angles:** the list of ideas the texts rotate through is `angles` in `prompt.go`.
+- **Quotes:** edit `quotes.txt`, one per line: `the quote | who said it`. Check who really said it at quoteinvestigator.com or en.wikiquote.org before adding one. A lot of famous quotes are pinned on the wrong person.
+- **The line under each quote:** edit `voice.md`. It's the prompt, with your real example message in it.
+- **This week's news:** write a line or two in `focus.txt` (like "Contest ends Friday."). It may show up in one of the lines. Clear it out when it's old. The repo is public, so only write what you'd be fine with anyone reading.
 
 Edits on github.com count too. The next morning's run picks them up.
 
@@ -19,6 +21,7 @@ Edits on github.com count too. The next morning's run picks them up.
 ## Run it
 ```
 scripts/test_run.sh          # checks + prints today's email, sends nothing
+go run . -dry-run -date 2026-11-02   # print the email for another day
 scripts/test_run.sh --send   # checks + sends one real email
 gh workflow run daily.yml    # run the GitHub job now
 ```

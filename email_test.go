@@ -14,8 +14,12 @@ func TestSubjectFor(t *testing.T) {
 }
 
 func TestFormatBody(t *testing.T) {
-	body := formatBody(goodDrafts())
-	for _, want := range []string{"OPTION 1 (short): every call", "OPTION 3 (short): whole household", "OPTION 4 (longer): the mission"} {
+	body := formatBody(buildDrafts(testQuotes(), goodLines()))
+	for _, want := range []string{
+		"OPTION 1\n\n\"Pressure is a privilege.\"\n- Billie Jean King\n\nThe hard call today",
+		"OPTION 3\n\n\"The best way out is always through.\"\n- Robert Frost\n",
+		"OPTION 4\n\n",
+	} {
 		if !strings.Contains(body, want) {
 			t.Errorf("body missing %q:\n%s", want, body)
 		}

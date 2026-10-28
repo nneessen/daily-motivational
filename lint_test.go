@@ -5,25 +5,34 @@ import (
 	"testing"
 )
 
-func goodDrafts() []Draft {
-	return []Draft{
-		{Label: "every call", Text: "Every call is a door that's already open.\nWalk through it."},
-		{Label: "listen first", Text: "Let them talk. The need shows up on its own."},
-		{Label: "whole household", Text: "Who else is in that house? Ask. 💪"},
-		{Label: "the mission", Text: strings.Repeat("Every policy is a family protected. ", 25)},
+func testQuotes() []Quote {
+	return []Quote{
+		{Text: "Pressure is a privilege.", Author: "Billie Jean King"},
+		{Text: "Never die easy.", Author: "Walter Payton"},
+		{Text: "The best way out is always through.", Author: "Robert Frost"},
+		{Text: "Well done is better than well said.", Author: "Benjamin Franklin"},
 	}
 }
 
-func TestFindProblemsPassesGoodDrafts(t *testing.T) {
-	if problems := findProblems(goodDrafts()); len(problems) != 0 {
+func goodLines() []string {
+	return []string{
+		"The hard call today is the one that pays. Take it.",
+		"LET'S WORK. 💪",
+		"",
+		"Somebody's whole family gets covered because you asked one more question.",
+	}
+}
+
+func TestFindProblemsPassesGoodLines(t *testing.T) {
+	if problems := findProblems(testQuotes(), goodLines()); len(problems) != 0 {
 		t.Fatalf("expected no problems, got %v", problems)
 	}
 }
 
 func TestFindProblemsCatchesTells(t *testing.T) {
-	drafts := goodDrafts()
-	drafts[0].Text = "This is a game-changer — trust me! Really! Truly! #grind 🔥💪"
-	got := strings.Join(findProblems(drafts), "\n")
+	lines := goodLines()
+	lines[0] = "This is a game-changer — trust me! Really! #grind 🔥💪"
+	got := strings.Join(findProblems(testQuotes(), lines), "\n")
 	for _, want := range []string{"dash", `"game-changer"`, "hashtag", "emoji", "exclamation"} {
 		if !strings.Contains(got, want) {
 			t.Errorf("expected a problem mentioning %s, got:\n%s", want, got)
@@ -32,24 +41,24 @@ func TestFindProblemsCatchesTells(t *testing.T) {
 }
 
 func TestFindProblemsWantsSpouse(t *testing.T) {
-	for _, text := range []string{"Is your wife covered too?", "Ask about her husband.", "Husbands, wives, kids."} {
-		drafts := goodDrafts()
-		drafts[1].Text = text
-		if got := strings.Join(findProblems(drafts), "\n"); !strings.Contains(got, "spouse") {
-			t.Errorf("%q: expected a spouse problem, got:\n%s", text, got)
+	for _, line := range []string{"Is your wife covered too?", "Ask about her husband.", "Husbands, wives, kids."} {
+		lines := goodLines()
+		lines[1] = line
+		if got := strings.Join(findProblems(testQuotes(), lines), "\n"); !strings.Contains(got, "spouse") {
+			t.Errorf("%q: expected a spouse problem, got:\n%s", line, got)
 		}
 	}
-	drafts := goodDrafts()
-	drafts[1].Text = "Is your spouse covered too?"
-	if problems := findProblems(drafts); len(problems) != 0 {
+	lines := goodLines()
+	lines[1] = "Is your spouse covered too?"
+	if problems := findProblems(testQuotes(), lines); len(problems) != 0 {
 		t.Errorf("expected no problems, got %v", problems)
 	}
 }
 
 func TestFindProblemsCatchesGymWallLines(t *testing.T) {
-	drafts := goodDrafts()
-	drafts[2].Text = "Get out of your comfort zone. Let that sink in."
-	got := strings.Join(findProblems(drafts), "\n")
+	lines := goodLines()
+	lines[2] = "Get out of your comfort zone. Let that sink in."
+	got := strings.Join(findProblems(testQuotes(), lines), "\n")
 	for _, want := range []string{`"comfort zone"`, `"let that sink in"`} {
 		if !strings.Contains(got, want) {
 			t.Errorf("expected a problem mentioning %s, got:\n%s", want, got)
@@ -57,28 +66,79 @@ func TestFindProblemsCatchesGymWallLines(t *testing.T) {
 	}
 }
 
+func TestFindProblemsCatchesRestatingTheQuote(t *testing.T) {
+	lines := goodLines()
+	lines[0] = "Remember, pressure is a privilege, so go get it."
+	lines[1] = "Never die easy out there."
+	got := strings.Join(findProblems(testQuotes(), lines), "\n")
+	for _, want := range []string{"line 1 repeats", "line 2 repeats"} {
+		if !strings.Contains(got, want) {
+			t.Errorf("expected %q, got:\n%s", want, got)
+		}
+	}
+	lines = goodLines()
+	lines[1] = "Easy days don't build anything."
+	if problems := findProblems(testQuotes(), lines); len(problems) != 0 {
+		t.Errorf("sharing one word with the quote is fine, got %v", problems)
+	}
+}
+
+func TestFindProblemsCatchesExtraQuotes(t *testing.T) {
+	lines := goodLines()
+	lines[0] = `Like my old coach said, "keep going."`
+	if got := strings.Join(findProblems(testQuotes(), lines), "\n"); !strings.Contains(got, "quote marks") {
+		t.Errorf("expected a quote marks problem, got:\n%s", got)
+	}
+}
+
 func TestFindProblemsAllowsOneCalendarMention(t *testing.T) {
-	drafts := goodDrafts()
-	drafts[0].Text = "It's Friday. Finish it."
-	if problems := findProblems(drafts); len(problems) != 0 {
+	lines := goodLines()
+	lines[0] = "It's Friday. Finish it."
+	if problems := findProblems(testQuotes(), lines); len(problems) != 0 {
 		t.Fatalf("one calendar mention should pass, got %v", problems)
 	}
-	drafts[1].Text = "Q4 is on the board."
-	got := strings.Join(findProblems(drafts), "\n")
-	if !strings.Contains(got, "2 options mention the day or the time of year") {
+	lines[1] = "Q4 is on the board."
+	got := strings.Join(findProblems(testQuotes(), lines), "\n")
+	if !strings.Contains(got, "2 lines mention the day or the time of year") {
 		t.Errorf("expected a calendar problem, got:\n%s", got)
 	}
 }
 
+func TestFindProblemsAllowsOneLineAboutCalls(t *testing.T) {
+	lines := goodLines()
+	lines[0] = "Same energy on call forty as call one."
+	if problems := findProblems(testQuotes(), lines); len(problems) != 0 {
+		t.Fatalf("one line about calls should pass, got %v", problems)
+	}
+	lines[3] = "Every caller has a family behind them."
+	got := strings.Join(findProblems(testQuotes(), lines), "\n")
+	if !strings.Contains(got, "2 lines talk about calls") {
+		t.Errorf("expected a calls problem, got:\n%s", got)
+	}
+}
+
 func TestFindProblemsChecksCountAndLength(t *testing.T) {
-	drafts := goodDrafts()[:3]
-	drafts[1].Text = strings.Repeat("word ", 90)
-	got := strings.Join(findProblems(drafts), "\n")
-	if !strings.Contains(got, "3 options instead of 4") {
+	lines := goodLines()[:3]
+	lines[1] = strings.Repeat("word ", 40)
+	got := strings.Join(findProblems(testQuotes(), lines), "\n")
+	if !strings.Contains(got, "3 lines for 4 quotes") {
 		t.Errorf("expected a count problem, got:\n%s", got)
 	}
-	if !strings.Contains(got, "option 2 is 90 words") {
+	if !strings.Contains(got, "line 2 is 40 words") {
 		t.Errorf("expected a length problem, got:\n%s", got)
+	}
+}
+
+func TestBuildDraftsHandlesMissingLines(t *testing.T) {
+	drafts := buildDrafts(testQuotes(), []string{"Go — now."})
+	if len(drafts) != 4 {
+		t.Fatalf("got %d drafts, want 4", len(drafts))
+	}
+	if drafts[0].Line != "Go... now." {
+		t.Errorf("dash not cleaned: %q", drafts[0].Line)
+	}
+	if drafts[3].Line != "" || drafts[3].Text() != "\"Well done is better than well said.\"\n- Benjamin Franklin" {
+		t.Errorf("a missing line should leave the quote alone, got %q", drafts[3].Text())
 	}
 }
 

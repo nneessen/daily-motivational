@@ -1,0 +1,158 @@
+# The quotes the morning texts are built on. One per line: the quote, then " | ", then who said it.
+#
+# Every quote here was checked against a real source: Wikiquote's sourced quotes, Quote
+# Investigator (quoteinvestigator.com), or the person's own book, speech or interview. A lot of
+# famous quotes are pinned on the wrong person (most "Einstein", "Twain", "Churchill" and
+# "Gandhi" lines are), so check a new one at quoteinvestigator.com or en.wikiquote.org first.
+# Don't trust BrainyQuote, Goodreads or Pinterest for who said it.
+#
+# The program prints each quote exactly as written here. Claude only writes the line under it.
+# Use plain " and ' quote marks and a plain hyphen, no curly quotes or long dashes.
+# Each weekday takes the next four, so a quote doesn't come back until the whole list has been used.
+
+# Starting and acting
+The most difficult thing is the decision to act, the rest is merely tenacity. | Amelia Earhart
+He who has begun has half done. Dare to be wise; begin! | Horace
+Well done is better than well said. | Benjamin Franklin
+A good plan violently executed right now is far better than a perfect plan executed next week. | George S. Patton
+I will act now. | Og Mandino
+Don't look back. Something might be gaining on you. | Satchel Paige
+Either you run the day or the day runs you. | Jim Rohn
+The best way out is always through. | Robert Frost
+While we are postponing, life speeds by. | Seneca
+Begin at once to live, and count each separate day as a separate life. | Seneca
+Make each day your masterpiece. | John Wooden
+I believe that it's in your moments of decision that your destiny is shaped. | Tony Robbins
+Do. Or do not. There is no try. | Yoda
+It always comes down to just two choices. Get busy living or get busy dying. | Stephen King
+
+Do not wait; the time will never be 'just right.' Start where you stand, and work with whatever tools you may have at your command, and better tools will be found as you go along. | Napoleon Hill
+If you want to change the world, start off by making your bed. | William H. McRaven
+I have not yet begun to fight! | John Paul Jones
+Inspiration is for amateurs, the rest of us just show up and get to work. | Chuck Close
+You may delay, but time will not. | Benjamin Franklin
+Just because you're doing a lot more doesn't mean you're getting a lot more done... Don't confuse movement with progress. | Denzel Washington
+I've learned that 100 percent of the shots you don't take don't go in the net. | Wayne Gretzky
+Days are expensive. When you spend a day, you have one less day to spend. So make sure you spend each one wisely. | Jim Rohn
+
+# Discipline and habits
+Only the disciplined ones are free in life. If you are undisciplined, you are a slave to your moods, you are a slave to your passions. | Eliud Kipchoge
+We must all suffer from one of two pains: the pain of discipline or the pain of regret. The difference is discipline weighs ounces while regret weighs tons. | Jim Rohn
+We are what we repeatedly do. Excellence, then, is not an act, but a habit. | Will Durant
+Every action you take is a vote for the person you wish to become. | James Clear
+A nail is driven out by another nail, habit is overcome by habit. | Erasmus
+Sometimes magic is just someone spending more time on something than anyone else might reasonably expect. | Teller
+The only easy day was yesterday. | U.S. Navy SEALs motto
+First say to yourself what you would be; and then do what you have to do. | Epictetus
+Waste no more time arguing what a good man should be. Be one. | Marcus Aurelius
+The first and best victory is to conquer self. | Plato
+Discipline equals freedom. | Jocko Willink
+Don't count on motivation. Count on discipline. | Jocko Willink
+Discipline is the bridge between goals and accomplishment. | Jim Rohn
+Success is nothing more than a few simple disciplines, practiced every day. | Jim Rohn
+Without commitment, you'll never start. But more importantly, without consistency, you'll never finish. | Denzel Washington
+Spend each day trying to be a little wiser than you were when you woke up. | Charlie Munger
+
+# Work and effort
+Far and away the best prize that life offers is the chance to work hard at work worth doing. | Theodore Roosevelt
+To give anything less than your best is to sacrifice the gift. | Steve Prefontaine
+Suffer now, and live the rest of your life as a champion. | Muhammad Ali
+The key is not the will to win... everybody has that. It is the will to prepare to win that is important. | Bob Knight
+Success is not an accident. It is hard work, perseverance, learning, studying, sacrifice and most of all, love of what you are doing or learning to do. | Pelé
+The only way to do great work is to love what you do. | Steve Jobs
+The cowards never started and the weak died along the way. That leaves us, ladies and gentlemen. Us. | Phil Knight
+Nothing great was ever achieved without enthusiasm. | Ralph Waldo Emerson
+
+Genius is one percent inspiration, ninety-nine percent perspiration. | Thomas Edison
+There are no secrets to success. It is the result of preparation, hard work and learning from failure. | Colin Powell
+It is a rough road that leads to the heights of greatness. | Seneca
+You are what your record says you are. | Bill Parcells
+Accept the challenges, so that you may feel the exhilaration of victory. | George S. Patton
+Ease is a greater threat to progress than hardship. | Denzel Washington
+There may be people that have more talent than you, but there's no excuse for anyone to work harder than you do. | Derek Jeter
+I did not get there by wishing for it, or dreaming about it, or hoping for it. I got there by working for it. | Estée Lauder
+Never die easy. | Walter Payton
+Gold medals really aren't made out of gold. They are made of sweat, determination, and a hard-to-find alloy called guts. | Dan Gable
+Be so good that they can't ignore you. | Steve Martin
+You are in danger of living a life so comfortable and soft that you will die without ever realizing your true potential. | David Goggins
+Talent is cheaper than table salt. What separates the talented individual from the successful one is a lot of hard work. | Stephen King
+When you want to succeed as bad as you want to breathe, then you'll be successful. | Eric Thomas
+Success is not to be pursued; it is to be attracted by the person you become. | Jim Rohn
+The score takes care of itself. | Bill Walsh
+
+# Losing, getting back up, keeping on
+I've missed over 9,000 shots in my career. I've lost almost 300 games. 26 times I've been trusted to take the game-winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed. | Michael Jordan
+I can accept failure. Everyone fails at something. But I can't accept not trying. | Michael Jordan
+Fall down seven times, get up eight. | Japanese proverb
+Failure is an event, not a person. Yesterday ended last night. | Zig Ziglar
+We may encounter many defeats, but we must not be defeated. | Maya Angelou
+I will persist until I succeed. | Og Mandino
+Always I will take another step. If that is of no avail I will take another, and yet another. In truth, one step at a time is not too difficult. | Og Mandino
+I'm convinced that about half of what separates the successful entrepreneurs from the non-successful ones is pure perseverance. | Steve Jobs
+Never give in, never, never, never, never, in nothing great or small, large or petty, never give in except to convictions of honour and good sense. | Winston Churchill
+If you can't fly, run; if you can't run, walk; if you can't walk, crawl; but by all means keep moving. | Martin Luther King Jr.
+It ain't over till it's over. | Yogi Berra
+It ain't about how hard you hit. It's about how hard you can get hit and keep moving forward. | Rocky Balboa
+Everybody has a plan until they get punched in the mouth. | Mike Tyson
+Failure is not fatal, but failure to change might be. | John Wooden
+If there is no struggle, there is no progress. | Frederick Douglass
+Success is to be measured not so much by the position that one has reached in life as by the obstacles which he has overcome while trying to succeed. | Booker T. Washington
+The impediment to action advances action. What stands in the way becomes the way. | Marcus Aurelius
+Tough times never last, but tough people do. | Robert H. Schuller
+The harder the conflict, the more glorious the triumph. | Thomas Paine
+A champion is someone who gets up when he can't. | Jack Dempsey
+Defeat is not the worst of failures. Not to have tried is the true failure. | George Edward Woodberry
+The credit belongs to the man who is actually in the arena; whose face is marred by the dust and sweat and blood; who strives valiantly; who errs and comes short again and again, because there is no effort without error or shortcoming. | Theodore Roosevelt
+
+Our greatest glory is not in never falling, but in rising every time we fall. | Oliver Goldsmith
+Many of life's failures are people who did not realize how close they were to success when they gave up. | Thomas Edison
+It's hard to beat a person who never gives up. | Babe Ruth
+Most of the important things in the world have been accomplished by people who have kept on trying when there seemed to be no hope at all. | Dale Carnegie
+If you want to change the world, don't ever, ever ring the bell. | William H. McRaven
+The world breaks everyone and afterward many are strong at the broken places. | Ernest Hemingway
+Anyone can hold the helm when the sea is calm. | Publilius Syrus
+If you learn from defeat, you haven't really lost. | Zig Ziglar
+It doesn't matter how many times you fail, you only have to be right once. | Mark Cuban
+Courage does not always roar. Sometimes courage is the quiet voice at the end of the day saying, 'I will try again tomorrow.' | Mary Anne Radmacher
+Failure will never overtake me if my determination to succeed is strong enough. | Og Mandino
+Don't give up. Don't ever give up. | Jim Valvano
+I really think a champion is defined not by their wins but by how they can recover when they fall. | Serena Williams
+Be patient and tough; someday this pain will be useful to you. | Ovid
+When we are no longer able to change a situation... we are challenged to change ourselves. | Viktor Frankl
+It's not over until I win. | Les Brown
+
+# Fear, nerves and confidence
+You gain strength, courage, and confidence by every experience in which you really stop to look fear in the face... You must do the thing you think you cannot do. | Eleanor Roosevelt
+Courage is resistance to fear, mastery of fear, not absence of fear. | Mark Twain
+Courage is not the absence of fear, but rather the judgment that something else is more important than fear. | Ambrose Redmoon
+We suffer more often in imagination than in reality. | Seneca
+It is not because things are difficult that we do not dare, but because we do not dare, things are difficult. | Seneca
+If you hear a voice within you saying, 'You are not a painter,' then by all means paint, boy, and that voice will be silenced, but only by working. | Vincent van Gogh
+Life is either a daring adventure or nothing. | Helen Keller
+Limits, like fears, are often just an illusion. | Michael Jordan
+No human is limited. | Eliud Kipchoge
+Pressure is a privilege. | Billie Jean King
+Champions adjust. | Billie Jean King
+Always bear in mind that your own resolution to succeed is more important than any other one thing. | Abraham Lincoln
+He who has a why to live for can bear almost any how. | Friedrich Nietzsche
+Your time is limited, so don't waste it living someone else's life. | Steve Jobs
+
+Optimism is the faith that leads to achievement; nothing can be done without hope. | Helen Keller
+Expect the best. Prepare for the worst. Capitalize on what comes. | Zig Ziglar
+You can fail at what you don't want, so you might as well take a chance on doing what you love. | Jim Carrey
+Inaction breeds doubt and fear. Action breeds confidence and courage. If you want to conquer fear, do not sit home and think about it. Go out and get busy. | Dale Carnegie
+If you want to improve, be content to be thought foolish and stupid with regard to external things. | Epictetus
+Force yourself to act enthusiastic and you'll become enthusiastic. | Frank Bettger
+We become what we think about. | Earl Nightingale
+The longer I live, the more convinced I become that life is 10 percent what happens to us and 90 percent how we respond to it. | Charles R. Swindoll
+
+# People, the team, and why we do it
+You can get everything in life you want if you will just help enough other people get what they want. | Zig Ziglar
+You can make more friends in two months by being interested in them, than in two years by making them interested in you. | Dale Carnegie
+Life's most persistent and urgent question is, 'What are you doing for others?' | Martin Luther King Jr.
+A life is not important except in the impact it has on other lives. | Jackie Robinson
+Talent wins games, but teamwork and intelligence wins championships. | Michael Jordan
+I will greet this day with love in my heart. | Og Mandino
+It takes 20 years to build a reputation and five minutes to ruin it. If you think about that, you'll do things differently. | Warren Buffett
+Service to others is the rent we pay for our room here on earth. | Muhammad Ali
+People don't like to be sold, but they love to buy. | Jeffrey Gitomer

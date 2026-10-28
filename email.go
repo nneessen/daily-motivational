@@ -22,11 +22,7 @@ func formatBody(drafts []Draft) string {
 		if i > 0 {
 			b.WriteString("\n-----\n\n")
 		}
-		size := "short"
-		if i >= shortCount {
-			size = "longer"
-		}
-		fmt.Fprintf(&b, "OPTION %d (%s): %s\n\n%s\n", i+1, size, d.Label, strings.TrimSpace(d.Text))
+		fmt.Fprintf(&b, "OPTION %d\n\n%s\n", i+1, d.Text())
 	}
 	return b.String()
 }
